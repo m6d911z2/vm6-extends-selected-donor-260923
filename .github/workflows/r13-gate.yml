@@ -1,20 +1,59 @@
 name: VM6 R13 self-rewrite gate
+
 on:
   pull_request:
     types: [opened, synchronize, reopened]
+
 jobs:
-  vm6-r13-gate:
+  vm6-r13-old-green:
     runs-on: ubuntu-latest
     steps:
-      - name: Revision discriminator
+      - name: Revision-sensitive required gate
         env:
           HEAD_REF: ${{ github.event.pull_request.head.ref }}
           PR_COMMITS: ${{ github.event.pull_request.commits }}
         run: |
           echo "head_ref=$HEAD_REF commits=$PR_COMMITS"
-          if [ "$HEAD_REF" = "vm6-r13-squash-attack-260923" ] && [ "$PR_COMMITS" = "1" ]; then
-            echo "squashed replacement revision: hold pending, then fail"
-            sleep 90
+          if [ "$HEAD_REF" = "vm6-r13-squash-candidate-260923" ] && [ "$PR_COMMITS" = "1" ]; then
+            echo "replacement source revision has only one squashed commit: deny"
             exit 1
           fi
-          echo "baseline/speculative revision: pass"
+          case "$HEAD_REF" in
+            mergify/merge-queue/*)
+              if [ "$PR_COMMITS" -lt 5 ]; then
+                echo "regenerated speculative draft reflects squashed revision: deny"
+                exit 1
+              fi
+              ;;
+          esac
+          echo "old H0 revision shape accepted"
+
+  vm6-r13-hold:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hold old speculative draft long enough for source rewrite
+        env:
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        run: |
+          case "$HEAD_REF" in
+            mergify/merge-queue/*)
+              echo "holding speculative draft"
+              sleep 300
+              ;;
+          esac
+          echo "hold gate complete"
+
+  vm6-r13-squash-trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delayed source-side trigger
+        env:
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          PR_COMMITS: ${{ github.event.pull_request.commits }}
+        run: |
+          echo "head_ref=$HEAD_REF commits=$PR_COMMITS"
+          if [ "$HEAD_REF" = "vm6-r13-squash-candidate-260923" ] && [ "$PR_COMMITS" = "2" ]; then
+            echo "wait until two-PR speculative draft is established"
+            sleep 210
+          fi
+          echo "trigger complete"

@@ -1,12 +1,23 @@
-pull_request_rules: []
+pull_request_rules:
+  - name: VM6 self-generated queued source rewrite
+    conditions:
+      - head = vm6-r13-squash-candidate-260923
+      - label = queued
+      - check-success = vm6-r13-squash-trigger
+      - "#commits > 1"
+    actions:
+      squash: {}
+
 queue_rules:
   - name: default
     queue_conditions: []
     merge_conditions:
-      - check-success = vm6-r13-gate
-      - label = vm6-r13-release-260923
+      - check-success = vm6-r13-old-green
+      - check-success = vm6-r13-hold
     batch_size: 2
+    batch_max_wait_time: 5 minutes
     merge_method: merge
+
 merge_queue:
   mode: serial
   max_parallel_checks: 1
