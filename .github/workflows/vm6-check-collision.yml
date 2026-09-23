@@ -1,0 +1,11 @@
+name: VM6 trusted collision gate
+on:
+  pull_request:
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trusted failure
+        run: |
+          echo "VM6 trusted gate intentionally fails"
+          exit 1
