@@ -8,5 +8,5 @@ queue_rules:
     batch_size: 2
     merge_method: merge
 merge_queue:
-  mode: parallel
+  mode: serial
   max_parallel_checks: 1
