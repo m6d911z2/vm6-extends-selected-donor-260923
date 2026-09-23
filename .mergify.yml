@@ -1,0 +1,12 @@
+pull_request_rules: []
+queue_rules:
+  - name: default
+    queue_conditions: []
+    merge_conditions:
+      - check-success = vm6-r13-gate
+      - label = vm6-r13-release-260923
+    batch_size: 2
+    merge_method: merge
+merge_queue:
+  mode: parallel
+  max_parallel_checks: 1

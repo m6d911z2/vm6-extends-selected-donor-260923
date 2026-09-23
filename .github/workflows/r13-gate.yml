@@ -1,0 +1,20 @@
+name: VM6 R13 self-rewrite gate
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  vm6-r13-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Revision discriminator
+        env:
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          PR_COMMITS: ${{ github.event.pull_request.commits }}
+        run: |
+          echo "head_ref=$HEAD_REF commits=$PR_COMMITS"
+          if [ "$HEAD_REF" = "vm6-r13-squash-attack-260923" ] && [ "$PR_COMMITS" = "1" ]; then
+            echo "squashed replacement revision: hold pending, then fail"
+            sleep 90
+            exit 1
+          fi
+          echo "baseline/speculative revision: pass"
