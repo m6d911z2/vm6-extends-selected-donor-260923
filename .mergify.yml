@@ -1,0 +1,8 @@
+pull_request_rules:
+  - name: VM6 cross-type check collapse probe
+    conditions:
+      - title = VM6_CHECK_COLLISION_20260924
+      - "#check-failure = 0"
+    actions:
+      comment:
+        message: VM6_CHECK_COLLISION_RULE_FIRED_20260924
