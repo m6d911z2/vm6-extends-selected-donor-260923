@@ -1,59 +1,73 @@
-name: VM6 R13 self-rewrite gate
+name: VM6 R13 self-rewrite finalizer discriminator
 
 on:
   pull_request:
     types: [opened, synchronize, reopened]
 
+permissions:
+  contents: read
+  pull-requests: read
+
 jobs:
-  vm6-r13-old-green:
+  vm6-r13-revision-gate:
     runs-on: ubuntu-latest
     steps:
-      - name: Revision-sensitive required gate
+      - name: Revision-sensitive authorization
         env:
           HEAD_REF: ${{ github.event.pull_request.head.ref }}
           PR_COMMITS: ${{ github.event.pull_request.commits }}
         run: |
           echo "head_ref=$HEAD_REF commits=$PR_COMMITS"
-          if [ "$HEAD_REF" = "vm6-r13-squash-candidate-260923" ] && [ "$PR_COMMITS" = "1" ]; then
-            echo "replacement source revision has only one squashed commit: deny"
+
+          if [ "$HEAD_REF" = "vm6-r13-squash-candidate3-260923" ] && [ "$PR_COMMITS" = "1" ]; then
+            echo "H1 exact revision is unauthorized; remain pending, then fail"
+            sleep 240
             exit 1
           fi
+
           case "$HEAD_REF" in
             mergify/merge-queue/*)
               if [ "$PR_COMMITS" -lt 5 ]; then
-                echo "regenerated speculative draft reflects squashed revision: deny"
+                echo "regenerated speculative draft reflects H1 and is unauthorized"
                 exit 1
               fi
               ;;
           esac
-          echo "old H0 revision shape accepted"
 
-  vm6-r13-hold:
+          echo "H0 speculative revision authorized"
+
+  vm6-r13-rewrite-release:
     runs-on: ubuntu-latest
     steps:
-      - name: Hold old speculative draft long enough for source rewrite
+      - name: Release old speculative result only after source rewrite
         env:
           HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
         run: |
           case "$HEAD_REF" in
             mergify/merge-queue/*)
-              echo "holding speculative draft"
-              sleep 300
+              echo "polling source PR until Mergify squash rewrites 2 commits to 1"
+              for i in $(seq 1 120); do
+                pr="$(curl -fsSL                   -H "Authorization: Bearer $GH_TOKEN"                   -H "Accept: application/vnd.github+json"                   "https://api.github.com/repos/$REPO/pulls?state=open&per_page=100" |
+                  jq -r '.[] | select(.head.ref=="vm6-r13-squash-candidate3-260923") | .number' |
+                  head -n1)"
+
+                if [ -n "$pr" ]; then
+                  commits="$(curl -fsSL                     -H "Authorization: Bearer $GH_TOKEN"                     -H "Accept: application/vnd.github+json"                     "https://api.github.com/repos/$REPO/pulls/$pr" |
+                    jq -r '.commits')"
+                  echo "candidate_pr=$pr commits=$commits"
+                  if [ "$commits" = "1" ]; then
+                    echo "source rewrite observed; release old speculative result"
+                    exit 0
+                  fi
+                fi
+                sleep 5
+              done
+
+              echo "source rewrite not observed before timeout"
+              exit 1
               ;;
           esac
-          echo "hold gate complete"
 
-  vm6-r13-squash-trigger:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Delayed source-side trigger
-        env:
-          HEAD_REF: ${{ github.event.pull_request.head.ref }}
-          PR_COMMITS: ${{ github.event.pull_request.commits }}
-        run: |
-          echo "head_ref=$HEAD_REF commits=$PR_COMMITS"
-          if [ "$HEAD_REF" = "vm6-r13-squash-candidate-260923" ] && [ "$PR_COMMITS" = "2" ]; then
-            echo "wait until two-PR speculative draft is established"
-            sleep 210
-          fi
-          echo "trigger complete"
+          echo "source PR run: release gate is not a content authorization"
