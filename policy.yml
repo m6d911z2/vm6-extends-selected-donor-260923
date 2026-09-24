@@ -1,0 +1,19 @@
+pull_request_rules: []
+commands_restrictions:
+  queue:
+    conditions:
+      - sender = {{author}}
+queue_rules:
+  - name: vm6-product-revoke-20260924
+    batch_size: 1
+    queue_conditions:
+      - title = VM6_MQ_PRODUCT_REVOKE_20260924
+    merge_conditions:
+      - check-success = vm6-mq-product-revoke-gate
+    max_checks_retries: 0
+    merge_method: merge
+    checks_timeout: null
+merge_queue:
+  mode: serial
+  max_parallel_checks: 1
+
