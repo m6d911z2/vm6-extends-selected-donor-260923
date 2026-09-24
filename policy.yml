@@ -15,5 +15,5 @@ queue_rules:
     checks_timeout: null
 merge_queue:
   mode: serial
-  max_parallel_checks: 1
+  max_parallel_checks: 2
 
