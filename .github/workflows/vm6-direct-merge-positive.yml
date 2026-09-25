@@ -1,0 +1,27 @@
+name: VM6 Direct Merge Positive
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  vm6-dm-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Direct Merge discriminator
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "head_ref=${GITHUB_HEAD_REF:-}"
+          have_a=0; have_b=0
+          test -f scope-a/seed.txt && have_a=1 || true
+          test -f scope-b/target.txt && have_b=1 || true
+          echo "scope_a=$have_a scope_b=$have_b"
+          if [[ "$have_a" = 1 && "$have_b" = 1 ]]; then
+            echo 'VM6_DM_COMBINED_FAIL=true'
+            exit 1
+          fi
+          if [[ "${GITHUB_HEAD_REF:-}" == mergify/merge-queue/* && "$have_a" = 1 ]]; then
+            echo 'VM6_DM_SEED_SYNTHETIC_HOLD=true'
+            sleep 90
+          fi
+          echo 'VM6_DM_GUARD=success'
