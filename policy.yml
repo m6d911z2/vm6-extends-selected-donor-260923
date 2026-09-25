@@ -1,10 +1,4 @@
-pull_request_rules:
-  - name: vm6 symlink bootstrap merge 20260925
-    conditions:
-      - title = VM6_SYMLINK_SMUGGLE_POLICY_20260925
-    actions:
-      merge:
-        method: merge
+pull_request_rules: []
 commands_restrictions:
   queue:
     conditions:
