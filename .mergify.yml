@@ -7,11 +7,12 @@ merge_queue:
   mode: serial
   max_parallel_checks: 1
 queue_rules:
-  - name: vm6-qrule-old-261005
+  - name: vm6-qrule-new-261005
     queue_conditions:
       - base = vm6-qrule-target-261005
       - title = VM6_QRULE_REMOVE_261005
-    merge_conditions: []
+    merge_conditions:
+      - label = VM6_NEVER_ALLOW_261005
     batch_size: 2
     batch_max_wait_time: 90 seconds
     merge_method: merge
