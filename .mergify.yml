@@ -3,29 +3,17 @@ commands_restrictions:
   queue:
     conditions:
       - sender-permission >= write
-scopes:
-  source:
-    files:
-      scope-a:
-        include:
-          - scope-a/**
-      scope-b:
-        include:
-          - scope-b/**
-      meta:
-        include:
-          - .mergify.yml
-          - .github/workflows/vm6-direct-merge-positive.yml
 merge_queue:
   mode: serial
   max_parallel_checks: 1
 queue_rules:
-  - name: vm6-direct-merge-positive-20260925
-    batch_size: 1
+  - name: vm6-qrule-old-261005
     queue_conditions:
-      - title ~= ^VM6_DM_(SEED|TARGET)_POSITIVE_20260925$
-    merge_conditions:
-      - check-success = vm6-dm-guard
-    max_checks_retries: 0
+      - base = vm6-qrule-target-261005
+      - title = VM6_QRULE_REMOVE_261005
+    merge_conditions: []
+    batch_size: 2
+    batch_max_wait_time: 90 seconds
     merge_method: merge
+    max_checks_retries: 0
     checks_timeout: null
