@@ -7,4 +7,5 @@ CREATE TABLE public.vm6_safe_settings (
 
 INSERT INTO "schema_migrations" (version) VALUES
 ('20261001000000'),
-('20261012010000');
+('20261012010000'),
+('20261012020000');
