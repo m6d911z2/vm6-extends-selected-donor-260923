@@ -2,8 +2,10 @@
 -- No live database or GitHub repository is referenced.
 CREATE TABLE public.vm6_safe_settings (
   id bigint NOT NULL,
-  protected_flag boolean DEFAULT true NOT NULL
+  protected_flag boolean DEFAULT true NOT NULL,
+  security_gate_enabled boolean DEFAULT true NOT NULL
 );
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20261001000000');
+('20261001000000'),
+('20261012020000');
