@@ -1,2 +1,2 @@
-extends: mergify-transfer-boundary-vm6
+extends: vm6-no-such-repo-261015xyz
 pull_request_rules: []
