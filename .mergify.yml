@@ -1,2 +1,2 @@
-extends: slug-reuse-original-vm6
+extends: untrusted-config-pr-vm6
 pull_request_rules: []
