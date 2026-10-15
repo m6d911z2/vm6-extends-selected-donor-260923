@@ -1,3 +1,4 @@
+# queue rule 'vm6-qpoison-261015': `allow_queue_branch_edit` was removed. It was already set to `false`, the default, and the option is being retired.
 pull_request_rules: []
 commands_restrictions:
   queue:
@@ -29,4 +30,3 @@ queue_rules:
     batch_size: 1
     max_checks_retries: 0
     checks_timeout: null
-    allow_queue_branch_edit: false
