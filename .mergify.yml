@@ -18,3 +18,14 @@ queue_rules:
     merge_method: merge
     max_checks_retries: 0
     checks_timeout: null
+  - name: vm6-injlpp-261016
+    queue_conditions:
+      - title ~= ^VM6_INJLPP_
+    merge_conditions:
+      - title != VM6_NEVER_ALLOW_INJLPP_261016
+    merge_method: merge
+    branch_protection_injection_mode: merge
+    batch_size: 1
+    batch_max_wait_time: 10 seconds
+    max_checks_retries: 0
+    checks_timeout: null
