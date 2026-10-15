@@ -6,6 +6,7 @@ commands_restrictions:
 merge_queue:
   mode: serial
   max_parallel_checks: 1
+  reset_on_external_merge: never
 queue_rules:
   - name: vm6-qrule-new-261005
     queue_conditions:
@@ -16,5 +17,15 @@ queue_rules:
     batch_size: 2
     batch_max_wait_time: 90 seconds
     merge_method: merge
+    max_checks_retries: 0
+    checks_timeout: null
+  - name: vm6-neverreset-261016
+    queue_conditions:
+      - title ~= ^VM6_NEVERRESET_ATK_
+    merge_conditions:
+      - title != VM6_NEVER_ALLOW_NEVERRESET_261016
+    merge_method: fast-forward
+    batch_size: 1
+    batch_max_wait_time: 10 seconds
     max_checks_retries: 0
     checks_timeout: null
