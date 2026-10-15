@@ -1,0 +1,1 @@
+BOTTOM other/** earns scope=other
