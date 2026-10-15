@@ -1,0 +1,17 @@
+name: vm6-twostep-gate
+on:
+  pull_request:
+jobs:
+  vm6-twostep-gate:
+    if: ${{ !startsWith(github.head_ref, 'mergify/merge-queue/') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: gate
+        run: |
+          echo "head=${{ github.head_ref }}"
+          echo "title=${{ github.event.pull_request.title }}"
+          case "${{ github.event.pull_request.title }}" in
+            VM6_TWOSTEP_CTRL_*) echo CTRL original must fail; exit 1 ;;
+            VM6_TWOSTEP_ATK_*) echo ATK original must succeed; exit 0 ;;
+            *) echo unexpected title; exit 1 ;;
+          esac
