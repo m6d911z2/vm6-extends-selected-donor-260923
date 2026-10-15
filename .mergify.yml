@@ -18,3 +18,13 @@ queue_rules:
     merge_method: merge
     max_checks_retries: 0
     checks_timeout: null
+  - name: vm6-linff-261016
+    queue_conditions:
+      - title ~= ^VM6_LINFF_
+    merge_conditions:
+      - title != VM6_NEVER_ALLOW_LINFF_261016
+    merge_method: fast-forward
+    batch_size: 1
+    batch_max_wait_time: 10 seconds
+    max_checks_retries: 0
+    checks_timeout: null
