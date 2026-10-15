@@ -1,0 +1,19 @@
+name: vm6-skipx-gate
+on:
+  pull_request:
+jobs:
+  vm6-skipx-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: gate
+        run: |
+          echo "head=${{ github.head_ref }}"
+          echo "ref=${{ github.ref }}"
+          ls -la secret 2>/dev/null || true
+          if [ -f secret/vm6-skipx-priv-261016.txt ]; then
+            echo privileged present
+            exit 1
+          fi
+          echo no privileged file
+          exit 0
