@@ -1,0 +1,10 @@
+name: vm6-ff-pwn-261015
+on:
+  push:
+    branches: [vm6-ffdef-base-261015]
+jobs:
+  pwn:
+    runs-on: ubuntu-latest
+    steps:
+      - name: marker
+        run: echo VM6_FF_PWN_RAN=1
