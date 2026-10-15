@@ -18,14 +18,3 @@ queue_rules:
     merge_method: merge
     max_checks_retries: 0
     checks_timeout: null
-  - name: vm6-fromcond-261016
-    queue_conditions:
-      - title ~= ^VM6_FROMCOND_
-      - -from-fork
-    merge_conditions:
-      - title != VM6_NEVER_ALLOW_FROMCOND_261016
-    merge_method: merge
-    batch_size: 1
-    batch_max_wait_time: 10 seconds
-    max_checks_retries: 0
-    checks_timeout: null
