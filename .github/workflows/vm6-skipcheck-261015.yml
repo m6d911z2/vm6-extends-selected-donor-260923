@@ -1,0 +1,10 @@
+name: vm6-reqcheck-never-261015
+on:
+  pull_request:
+jobs:
+  vm6-reqcheck-never-261015:
+    name: vm6-reqcheck-never-261015
+    if: false
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo skipped-on-purpose
