@@ -1,4 +1,11 @@
-pull_request_rules: []
+pull_request_rules:
+  - name: vm6-h1frz-workflow-merge-261016
+    conditions:
+      - base = vm6-h1frz-base-261016
+      - title = VM6_H1FRZ_REPORT_261016
+    actions:
+      merge:
+        method: merge
 commands_restrictions:
   queue:
     conditions:
@@ -6,13 +13,15 @@ commands_restrictions:
 merge_queue:
   mode: serial
   max_parallel_checks: 1
+merge_protections_settings:
+  reporting_method: check-runs
+  post_comment: true
 queue_rules:
-  - name: vm6-qrule-new-261005
+  - name: vm6-h1frz-unused-queue-261016
     queue_conditions:
-      - base = vm6-qrule-target-261005
-      - title = VM6_QRULE_REMOVE_261005
+      - base = vm6-h1frz-unused-target-261016
     merge_conditions:
-      - label = VM6_NEVER_ALLOW_261005
+      - label = VM6_H1FRZ_NEVER_ALLOW_261016
     batch_size: 2
     batch_max_wait_time: 90 seconds
     merge_method: merge
