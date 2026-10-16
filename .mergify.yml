@@ -1,10 +1,4 @@
-pull_request_rules:
-  - name: vm6-updprobe-update
-    conditions:
-      - title ~= ^VM6_UPDPROBE_ATK_
-      - "#commits-behind > 0"
-    actions:
-      update:
+pull_request_rules: []
 commands_restrictions:
   queue:
     conditions:
