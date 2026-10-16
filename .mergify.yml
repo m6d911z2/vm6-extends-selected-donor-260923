@@ -1,4 +1,17 @@
-pull_request_rules: []
+pull_request_rules:
+  - name: vm6-updlast-update
+    conditions:
+      - title ~= ^VM6_UPDLAST2_ATK_
+      - "#commits-behind > 0"
+    actions:
+      update:
+  - name: vm6-updlast-merge
+    conditions:
+      - title ~= ^VM6_UPDLAST2_ATK_
+      - "#commits-behind = 0"
+    actions:
+      merge:
+        method: merge
 commands_restrictions:
   queue:
     conditions:
