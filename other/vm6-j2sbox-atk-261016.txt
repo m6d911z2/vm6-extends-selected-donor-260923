@@ -1,1 +1,1 @@
-j2sbox mark cycler 1
+j2sbox mark selfctx 2
