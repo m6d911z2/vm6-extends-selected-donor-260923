@@ -1,4 +1,10 @@
-pull_request_rules: []
+pull_request_rules:
+  - name: vm6-mpsched-261016
+    conditions:
+      - title ~= ^VM6_MPSCHED_
+    actions:
+      merge:
+        method: merge
 commands_restrictions:
   queue:
     conditions:
@@ -6,6 +12,15 @@ commands_restrictions:
 merge_queue:
   mode: serial
   max_parallel_checks: 1
+merge_protections_settings:
+  reporting_method: check-runs
+  post_comment: true
+merge_protections:
+  - name: vm6-mpsched-datetime-261016
+    if:
+      - title ~= ^VM6_MPSCHED_
+    success_conditions:
+      - current-datetime >= 2099-01-01T00:00:00[UTC]
 queue_rules:
   - name: vm6-qrule-new-261005
     queue_conditions:
