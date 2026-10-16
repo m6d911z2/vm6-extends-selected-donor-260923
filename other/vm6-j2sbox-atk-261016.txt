@@ -1,1 +1,1 @@
-j2sbox mark inctitle 0
+j2sbox mark cycler 1
