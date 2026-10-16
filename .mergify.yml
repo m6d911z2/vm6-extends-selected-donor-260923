@@ -18,16 +18,3 @@ queue_rules:
     merge_method: merge
     max_checks_retries: 0
     checks_timeout: null
-
-  - name: vm6-g1ff-review-boundary-261016r2
-    queue_conditions:
-      - base = vm6-g1ff-review-base-261016r2
-      - title ~= ^VM6_G1FF_261016r2_
-      - approved-reviews-by = livastic-vm6-primary-rn260917
-    merge_conditions:
-      - approved-reviews-by = livastic-vm6-primary-rn260917
-    merge_method: fast-forward
-    batch_size: 1
-    max_checks_retries: 0
-    checks_timeout: null
-    allow_queue_branch_edit: false
