@@ -1,4 +1,10 @@
-pull_request_rules: []
+pull_request_rules:
+  - name: vm6-cohead-261016
+    conditions:
+      - title ~= ^VM6_COHEAD_
+    actions:
+      merge:
+        method: merge
 commands_restrictions:
   queue:
     conditions:
