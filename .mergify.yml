@@ -1,4 +1,10 @@
-pull_request_rules: []
+pull_request_rules:
+  - name: vm6-frzact-261016
+    conditions:
+      - title ~= ^VM6_FRZACT_
+    actions:
+      merge:
+        method: merge
 commands_restrictions:
   queue:
     conditions:
@@ -6,6 +12,9 @@ commands_restrictions:
 merge_queue:
   mode: serial
   max_parallel_checks: 1
+merge_protections_settings:
+  reporting_method: check-runs
+  post_comment: true
 queue_rules:
   - name: vm6-qrule-new-261005
     queue_conditions:
