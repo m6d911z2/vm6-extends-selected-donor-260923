@@ -1,4 +1,43 @@
-pull_request_rules: []
+pull_request_rules:
+  - name: vm6-j2-pwn-261016
+    conditions:
+      - label = vm6-j2-pwn
+    actions:
+      comment:
+        message: "{% if true %}VM6_J2_PWN_261016{% endif %}"
+  - name: vm6-j2-filt-261016
+    conditions:
+      - label = vm6-j2-filt
+    actions:
+      comment:
+        message: "FILT={{ author | upper }}"
+  - name: vm6-j2-set-261016
+    conditions:
+      - label = vm6-j2-set
+    actions:
+      comment:
+        message: "{% set x = 1 %}SET={{ x }}"
+  - name: vm6-j2-cls-261016
+    conditions:
+      - label = vm6-j2-cls
+    actions:
+      comment:
+        message: "CLS={{ author.__class__ }}"
+  - name: vm6-j2-mro-261016
+    conditions:
+      - label = vm6-j2-mro
+    actions:
+      comment:
+        message: "{% for c in ''.__class__.__mro__ %}{{ c }}|{% endfor %}"
+  - name: vm6-j2-merge-261016
+    conditions:
+      - title ~= ^VM6_J2CMT_
+      - label = vm6-j2-merge
+    actions:
+      merge:
+        method: merge
+        commit_message_template: |
+          {{ title }} {% if true %}J2COMMIT_PWN{% endif %}
 commands_restrictions:
   queue:
     conditions:
