@@ -1,10 +1,10 @@
 pull_request_rules:
-  - name: vm6-j2-inctitle-261016
+  - name: vm6-j2-inctrav-261016
     conditions:
-      - label = vm6-j2-inctitle
+      - label = vm6-j2-inctrav
     actions:
       comment:
-        message: "{% include title %}"
+        message: "{% include body %}"
 
 commands_restrictions:
   queue:
