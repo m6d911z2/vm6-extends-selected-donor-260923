@@ -1,4 +1,25 @@
-pull_request_rules: []
+pull_request_rules:
+  - name: vm6-copyq-copy-261016
+    conditions:
+      - title ~= ^VM6_COPYQ_ATK_
+      - base = vm6-copyq-src-261016
+    actions:
+      copy:
+        branches:
+          - vm6-copyq-base-261016
+        title: "VM6_COPYQ_COPY_{{ number }}"
+        ignore_conflicts: true
+        report_mode:
+          - check
+          - comment
+  - name: vm6-copyq-merge-261016
+    conditions:
+      - title ~= ^VM6_COPYQ_COPY_
+      - base = vm6-copyq-base-261016
+      - head ~= ^mergify/copy/
+    actions:
+      merge:
+        method: merge
 commands_restrictions:
   queue:
     conditions:
