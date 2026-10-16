@@ -1,21 +1,20 @@
-pull_request_rules:
-  - name: scheduled-freeze-workflow-merge
+pull_request_rules: []
+commands_restrictions:
+  queue:
     conditions:
-      - base = h1-frz-base-20261016062415
-      - title = H1_FRZACT_20261016062415
-    actions:
-      merge:
-        method: merge
+      - sender-permission >= write
 merge_queue:
   mode: serial
   max_parallel_checks: 1
-merge_protections_settings:
-  reporting_method: check-runs
-  post_comment: true
 queue_rules:
-  - name: unused-queue-rule
+  - name: vm6-qrule-new-261005
     queue_conditions:
-      - base = unrelated-20261016062415
+      - base = vm6-qrule-target-261005
+      - title = VM6_QRULE_REMOVE_261005
     merge_conditions:
-      - label = never-present-20261016062415
+      - label = VM6_NEVER_ALLOW_261005
+    batch_size: 2
+    batch_max_wait_time: 90 seconds
     merge_method: merge
+    max_checks_retries: 0
+    checks_timeout: null
