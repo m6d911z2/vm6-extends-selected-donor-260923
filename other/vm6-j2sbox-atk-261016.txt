@@ -1,1 +1,1 @@
-j2sbox mark selfctx 2
+j2sbox mark joiner 3
