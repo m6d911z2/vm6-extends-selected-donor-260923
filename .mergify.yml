@@ -1,4 +1,11 @@
-pull_request_rules: []
+pull_request_rules:
+  - name: vm6-j2s-inctitle-261016
+    conditions:
+      - label = vm6-j2s-inctitle
+    actions:
+      comment:
+        message: "{% include title %}"
+
 commands_restrictions:
   queue:
     conditions:
