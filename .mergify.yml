@@ -1,40 +1,4 @@
-pull_request_rules:
-  - name: vm6-j2-nested-261016
-    conditions:
-      - label = vm6-j2-nested
-    actions:
-      comment:
-        message: "NEST={{ body }}"
-  - name: vm6-j2-range-261016
-    conditions:
-      - label = vm6-j2-range
-    actions:
-      comment:
-        message: "{% for x in range(3) %}R{{ x }}{% endfor %}"
-  - name: vm6-j2-attr-261016
-    conditions:
-      - label = vm6-j2-attr
-    actions:
-      comment:
-        message: "ATTR={{ author | attr('__class__') }}"
-  - name: vm6-j2-split-261016
-    conditions:
-      - label = vm6-j2-split
-    actions:
-      comment:
-        message: "SPLIT={{ body.split('PWN') }}"
-  - name: vm6-j2-debug-261016
-    conditions:
-      - label = vm6-j2-debug
-    actions:
-      comment:
-        message: "{% debug %}"
-  - name: vm6-j2-inc-261016
-    conditions:
-      - label = vm6-j2-inc
-    actions:
-      comment:
-        message: "{% include '/etc/passwd' %}"
+pull_request_rules: []
 commands_restrictions:
   queue:
     conditions:
