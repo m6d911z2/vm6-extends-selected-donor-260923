@@ -1,11 +1,4 @@
-pull_request_rules:
-  - name: vm6-mpif-261016
-    conditions:
-      - title ~= ^VM6_MPIF_
-      - label = vm6-mpif-go
-    actions:
-      merge:
-        method: merge
+pull_request_rules: []
 commands_restrictions:
   queue:
     conditions:
@@ -13,15 +6,6 @@ commands_restrictions:
 merge_queue:
   mode: serial
   max_parallel_checks: 1
-merge_protections_settings:
-  reporting_method: check-runs
-  post_comment: true
-merge_protections:
-  - name: vm6-mpif-secret-review-261016
-    if:
-      - files ~= ^secret/
-    success_conditions:
-      - "#approved-reviews-by >= 1"
 queue_rules:
   - name: vm6-qrule-new-261005
     queue_conditions:
