@@ -14,45 +14,31 @@ queue_rules:
     merge_method: merge
     commit_message_template: "{{ 7*7 }}"
 pull_request_rules:
-  - name: vm6-j2-N1-fmtmapctl-261019
+  - name: vm6-j2-Q1-attrsafe-261019
     conditions:
       - title = Add vm6 ssti render probe file
     actions:
       comment:
         message: |
-          [FmtMapCtl] {{ '{k}'.format_map({'k': 'ok-word'}) }}
-  - name: vm6-j2-N2-fmtmapdunder-261019
+          [AttrSafe] {{ number | attr('real') }}
+  - name: vm6-j2-Q2-listsub-261019
     conditions:
       - title = Add vm6 ssti render probe file
     actions:
       comment:
         message: |
-          [FmtMapDunder] {{ ('{k.' ~ '_' ~ '_' ~ 'class' ~ '_' ~ '_' ~ '}').format_map({'k': number}) }}
-  - name: vm6-j2-N3-base-261019
+          [ListSub] {{ ['ok'][0] }}
+  - name: vm6-j2-Q3-forrange-261019
     conditions:
       - title = Add vm6 ssti render probe file
     actions:
       comment:
         message: |
-          [BaseProbe] {{ base }}
-  - name: vm6-j2-N4-head-261019
+          [ForRange] {% for i in range(3) %}{{ i }}{% endfor %}
+  - name: vm6-j2-Q4-set-261019
     conditions:
       - title = Add vm6 ssti render probe file
     actions:
       comment:
         message: |
-          [HeadProbe] {{ head }}
-  - name: vm6-j2-N5-author-261019
-    conditions:
-      - title = Add vm6 ssti render probe file
-    actions:
-      comment:
-        message: |
-          [AuthorProbe] {{ author }}
-  - name: vm6-j2-N6-num-261019
-    conditions:
-      - title = Add vm6 ssti render probe file
-    actions:
-      comment:
-        message: |
-          [NumProbe] {{ number }}
+          [SetCtl] {% set z = '_' ~ '_' ~ 'class' ~ '_' ~ '_' %}{{ z }}
