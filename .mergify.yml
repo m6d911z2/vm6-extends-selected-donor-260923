@@ -49,10 +49,3 @@ pull_request_rules:
       comment:
         message: |
           [Dunder] {{ body.__class__ }}
-  - name: vm6-j2-F-join-261019
-    conditions:
-      - title = Add vm6 ssti render probe file
-    actions:
-      comment:
-        message: |
-          [JoinCtl] {{ labels | join(',') }}
