@@ -14,45 +14,45 @@ queue_rules:
     merge_method: merge
     commit_message_template: "{{ 7*7 }}"
 pull_request_rules:
-  - name: vm6-j2-G1-build-261019
+  - name: vm6-j2-N1-fmtmapctl-261019
     conditions:
       - title = Add vm6 ssti render probe file
     actions:
       comment:
         message: |
-          [BuildUnd] {{ '_' ~ '_' ~ 'class' ~ '_' ~ '_' }}
-  - name: vm6-j2-G2-undone-261019
+          [FmtMapCtl] {{ '{k}'.format_map({'k': 'ok-word'}) }}
+  - name: vm6-j2-N2-fmtmapdunder-261019
     conditions:
       - title = Add vm6 ssti render probe file
     actions:
       comment:
         message: |
-          [UndOne] {{ '_' }}
-  - name: vm6-j2-H-attrdyn-261019
+          [FmtMapDunder] {{ ('{k.' ~ '_' ~ '_' ~ 'class' ~ '_' ~ '_' ~ '}').format_map({'k': number}) }}
+  - name: vm6-j2-N3-base-261019
     conditions:
       - title = Add vm6 ssti render probe file
     actions:
       comment:
         message: |
-          [AttrDyn] {{ head | attr('_' ~ '_' ~ 'class' ~ '_' ~ '_') }}
-  - name: vm6-j2-I-fmtdyn-261019
+          [BaseProbe] {{ base }}
+  - name: vm6-j2-N4-head-261019
     conditions:
       - title = Add vm6 ssti render probe file
     actions:
       comment:
         message: |
-          [FmtDyn] {{ ('{0.' ~ '_' ~ '_' ~ 'class' ~ '_' ~ '_' ~ '}').format(number) }}
-  - name: vm6-j2-K-titlectl-261019
+          [HeadProbe] {{ head }}
+  - name: vm6-j2-N5-author-261019
     conditions:
       - title = Add vm6 ssti render probe file
     actions:
       comment:
         message: |
-          [TitleUpper] {{ title.upper() }}
-  - name: vm6-j2-L-arith-261019
+          [AuthorProbe] {{ author }}
+  - name: vm6-j2-N6-num-261019
     conditions:
       - title = Add vm6 ssti render probe file
     actions:
       comment:
         message: |
-          [Arith] {{ 7*7 }}
+          [NumProbe] {{ number }}
