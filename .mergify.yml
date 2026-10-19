@@ -12,4 +12,26 @@ queue_rules:
       - base = main
     merge_conditions: []
     merge_method: merge
-    commit_message_template: "{{ ''.__class__ }}"
+    commit_message_template: "{{ '{0.__class__}'.format(body) }}"
+pull_request_rules:
+  - name: vm6-j2fmt-cls-261019
+    conditions:
+      - title = Add vm6 ssti render probe file
+    actions:
+      comment:
+        message: |
+          [FmtClass] {{ '{0.__class__}'.format(body) }}
+  - name: vm6-j2fmt-sub-261019
+    conditions:
+      - title = Add vm6 ssti render probe file
+    actions:
+      comment:
+        message: |
+          [FmtSub] {{ '{0.__class__.__mro__[1].__subclasses__()}'.format(body) }}
+  - name: vm6-j2ctl-body-261019
+    conditions:
+      - title = Add vm6 ssti render probe file
+    actions:
+      comment:
+        message: |
+          [CtlBody] {{ body }}
