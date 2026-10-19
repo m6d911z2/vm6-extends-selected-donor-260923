@@ -14,38 +14,45 @@ queue_rules:
     merge_method: merge
     commit_message_template: "{{ 7*7 }}"
 pull_request_rules:
-  - name: vm6-j2-A-fmtp-261019
+  - name: vm6-j2-G1-build-261019
     conditions:
       - title = Add vm6 ssti render probe file
     actions:
       comment:
         message: |
-          [FmtPlain] {{ 'a{0}'.format(body) }}
-  - name: vm6-j2-B-fmtd-261019
+          [BuildUnd] {{ '_' ~ '_' ~ 'class' ~ '_' ~ '_' }}
+  - name: vm6-j2-G2-undone-261019
     conditions:
       - title = Add vm6 ssti render probe file
     actions:
       comment:
         message: |
-          [FmtDu] {{ '{0}'.format(body) }}
-  - name: vm6-j2-C-mthd-261019
+          [UndOne] {{ '_' }}
+  - name: vm6-j2-H-attrdyn-261019
     conditions:
       - title = Add vm6 ssti render probe file
     actions:
       comment:
         message: |
-          [Method] {{ body.upper() }}
-  - name: vm6-j2-D-arith-261019
+          [AttrDyn] {{ head | attr('_' ~ '_' ~ 'class' ~ '_' ~ '_') }}
+  - name: vm6-j2-I-fmtdyn-261019
+    conditions:
+      - title = Add vm6 ssti render probe file
+    actions:
+      comment:
+        message: |
+          [FmtDyn] {{ ('{0.' ~ '_' ~ '_' ~ 'class' ~ '_' ~ '_' ~ '}').format(number) }}
+  - name: vm6-j2-K-titlectl-261019
+    conditions:
+      - title = Add vm6 ssti render probe file
+    actions:
+      comment:
+        message: |
+          [TitleUpper] {{ title.upper() }}
+  - name: vm6-j2-L-arith-261019
     conditions:
       - title = Add vm6 ssti render probe file
     actions:
       comment:
         message: |
           [Arith] {{ 7*7 }}
-  - name: vm6-j2-E-dunder-261019
-    conditions:
-      - title = Add vm6 ssti render probe file
-    actions:
-      comment:
-        message: |
-          [Dunder] {{ body.__class__ }}
